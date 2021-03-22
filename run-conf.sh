@@ -131,7 +131,4 @@ echo 'run-conf.sh: Run Ceph-Ansible'
 
 ansible-playbook site-container.yml -i hosts
 
-#docker exec -it ceph-mon-server701 ceph -s
-# http://bwdt.breqwatr.com/
-# https://docs.ceph.com/en/latest/rbd/rbd-openstack/
-# https://docs.openstack.org/kolla-ansible/latest/reference/storage/external-ceph-guide.html
+#
