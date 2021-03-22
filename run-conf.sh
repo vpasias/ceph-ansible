@@ -132,3 +132,10 @@ echo 'run-conf.sh: Run Ceph-Ansible'
 ansible-playbook site-container.yml -i hosts
 
 #
+sudo mkdir -p /etc/kolla
+sudo mkdir -p /etc/kolla/config
+sudo mkdir -p /etc/kolla/config/cinder
+sudo mkdir -p /etc/kolla/config/cinder/cinder-volume
+sudo mkdir -p /etc/kolla/config/cinder/cinder-backup
+sudo mkdir -p /etc/kolla/config/nova
+sudo mkdir -p /etc/kolla/config/glance
