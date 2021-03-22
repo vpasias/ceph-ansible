@@ -131,13 +131,6 @@ echo 'run-conf.sh: Run Ceph-Ansible'
 
 ansible-playbook site-container.yml -i hosts
 
-if [ $? -ne 0 ]; then
-  echo "Deploy failed"
-  exit $?
-fi
-
-echo 'run-conf.sh: Ceph-Ansible Succesfully Deployed'
-
 #docker exec -it ceph-mon-server701 ceph -s
 # http://bwdt.breqwatr.com/
 # https://docs.ceph.com/en/latest/rbd/rbd-openstack/
