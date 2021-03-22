@@ -139,3 +139,5 @@ fi
 echo 'run-conf.sh: Ceph-Ansible Succesfully Deployed'
 
 #docker exec -it ceph-mon-server701 ceph -s
+# http://bwdt.breqwatr.com/
+# https://docs.ceph.com/en/latest/rbd/rbd-openstack/
