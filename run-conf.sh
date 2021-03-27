@@ -53,7 +53,8 @@ pip3 install -U pip
 
 echo 'run-kolla.sh: Install Ansible'
 sudo pip3 install --upgrade pip
-sudo pip install -r requirements.txt
+sudo pip install -U 'ansible<2.10'
+#sudo pip install -r requirements.txt
 
 if [ $? -ne 0 ]; then
   echo "Cannot install Ansible"
