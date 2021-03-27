@@ -47,9 +47,9 @@ ssh -o StrictHostKeyChecking=no vagrant@server703 "uname -a"
 
 echo 'run-conf.sh: Configuration of Ansible'
 
-DEBIAN_FRONTEND=noninteractive apt update
-DEBIAN_FRONTEND=noninteractive apt install -y python3 python3-simplejson python3-jinja2 python3-dev python3-venv python3-pip libffi-dev gcc libssl-dev curl git vim
-pip3 install -U pip
+DEBIAN_FRONTEND=noninteractive sudo apt update
+DEBIAN_FRONTEND=noninteractive sudo apt install -y python3 python3-simplejson python3-jinja2 python3-dev python3-venv python3-pip libffi-dev gcc libssl-dev curl git vim
+sudo pip3 install -U pip
 
 echo 'run-kolla.sh: Install Ansible'
 sudo pip3 install --upgrade pip
