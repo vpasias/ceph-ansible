@@ -54,7 +54,6 @@ sudo pip3 install -U pip
 echo 'run-kolla.sh: Install Ansible'
 sudo pip3 install --upgrade pip
 sudo pip install -U 'ansible<2.10'
-#sudo pip install -r requirements.txt
 
 if [ $? -ne 0 ]; then
   echo "Cannot install Ansible"
@@ -66,6 +65,7 @@ echo 'run-conf.sh: Configuration of Ceph-Ansible'
 git clone https://github.com/ceph/ceph-ansible.git
 cd ceph-ansible
 git checkout stable-5.0
+sudo pip install -r requirements.txt
 
 cat << EOF | tee group_vars/all.yml
 generate_fsid: true
