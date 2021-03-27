@@ -126,7 +126,7 @@ EOF
 
 echo 'run-conf.sh: Check Node Connectivity'
 
-ansible -m ping -i hosts --hosts all
+ansible -m ping -i hosts mons
 
 echo 'run-conf.sh: Run Ceph-Ansible'
 
