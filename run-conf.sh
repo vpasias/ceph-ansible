@@ -80,10 +80,10 @@ containerized_deployment: true
 osd_objectstore: bluestore
 ceph_docker_registry: docker.io
 radosgw_interface: bond0
-dashboard_admin_user: admin
-dashboard_admin_password: admin
-grafana_admin_user: admin
-grafana_admin_password: password
+dashboard_admin_user: vagrant
+dashboard_admin_password: vagrant
+grafana_admin_user: vagrant
+grafana_admin_password: vagrant
 EOF
 
 cat << EOF | tee group_vars/osds.yml
