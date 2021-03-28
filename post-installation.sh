@@ -50,7 +50,7 @@ docker exec -it ceph-mon-server701 ceph auth get-or-create client.cinder | sshpa
 
 docker exec -it ceph-mon-server701 ceph auth get-or-create client.cinder | sshpass -p vagrant ssh vagrant@server104 'sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder.keyring'
 
-docker exec -it ceph-mon-server701 ceph auth get-or-create client.cinder-backup | sshpass -p vagrant ssh vagrant@server104 'sudo tee /etc/kolla/config/cinder/cinder-backup/ceph/ceph.client.cinder-backup.keyring'
+docker exec -it ceph-mon-server701 ceph auth get-or-create client.cinder-backup | sshpass -p vagrant ssh vagrant@server104 'sudo tee /etc/kolla/config/cinder/cinder-backup/ceph.client.cinder-backup.keyring'
 
 docker exec -it ceph-mon-server701 ceph auth get-or-create client.cinder | sshpass -p vagrant ssh vagrant@server104 'sudo tee /etc/kolla/config/nova/ceph.client.cinder.keyring'
 
