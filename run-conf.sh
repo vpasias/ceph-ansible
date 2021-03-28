@@ -80,7 +80,9 @@ containerized_deployment: true
 osd_objectstore: bluestore
 ceph_docker_registry: docker.io
 radosgw_interface: bond0
+dashboard_admin_user: admin
 dashboard_admin_password: admin
+grafana_admin_user: admin
 grafana_admin_password: password
 EOF
 
