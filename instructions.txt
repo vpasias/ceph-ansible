@@ -1,0 +1,67 @@
+# Create network infrastructure as per automatic-for-the-people (https://github.com/vpasias/automatic-for-the-people) - a-f-t-p.txt
+
+########################################################################################################################
+###################### Create a Ceph Cluster (https://github.com/vpasias/ceph-ansible) ########################################################
+##############################################################################################################################
+
+vagrant ssh server104
+
+git clone https://github.com/vpasias/ceph-ansible.git && cd ceph-ansible && chmod +x *.sh && ls -la && sudo mv /etc/hosts /etc/old.hosts && sudo cp etc.hosts /etc/hosts
+
+./run-conf.sh
+
+exit
+
+vagrant ssh server701 -c "sudo -i"
+
+docker ps
+
+docker exec -it ceph-mon-server701 ceph -s
+
+########################################################################################################################
+###################### Create Ceph Configuration for Kolla-ansible  ########################################################
+######################## http://bwdt.breqwatr.com/ #######################
+######################## https://docs.ceph.com/en/latest/rbd/rbd-openstack/ #######################
+######################## https://docs.openstack.org/kolla-ansible/latest/reference/storage/external-ceph-guide.html #######################
+##############################################################################################################################
+
+git clone https://github.com/vpasias/ceph-ansible.git && cd ceph-ansible && chmod +x *.sh && ls -la
+
+./post-installation.sh
+
+#fsid = 2eb006f4-0c81-4a9d-8282-9d312b41c1df
+#mon host = [v2:172.16.3.101:3300,v1:172.16.3.101:6789],[v2:172.16.3.102:3300,v1:172.16.3.102:6789],[v2:172.16.3.103:3300,v1:172.16.3.103:6789]
+#mon initial members = server701,server702,server703
+
+cat << EOF | tee ceph.conf
+[global]
+# to be derived from /etc/ceph/ceph.conf
+fsid = 1d89fec3-325a-4963-a950-c4afedd37fe3
+# to be derived from /etc/ceph/ceph.conf
+mon_initial_members = server701,server702,server703
+# to be derived from /etc/ceph/ceph.conf
+mon_host = 172.16.3.101 172.16.3.102 172.16.3.103
+auth_cluster_required = cephx
+auth_service_required = cephx
+auth_client_required = cephx
+EOF
+
+sshpass -p vagrant scp -o StrictHostKeyChecking=no ceph.conf vagrant@server104:/home/vagrant/ceph.conf
+
+# https://tracker.ceph.com/projects/ceph/wiki/10_Commands_Every_Ceph_Administrator_Should_Know
+
+docker exec -it ceph-mon-server701 ceph -s
+docker exec -it ceph-mon-server701 ceph df
+docker exec -it ceph-mon-server701 ceph pg dump
+docker exec -it ceph-mon-server701 ceph osd tree
+docker exec -it ceph-mon-server701 ceph tell osd.* bench
+
+exit
+
+vagrant ssh server104
+
+sudo cp /home/vagrant/ceph.conf /etc/kolla/config/glance/ceph.conf && sudo cp /home/vagrant/ceph.conf /etc/kolla/config/cinder/ceph.conf && \
+sudo cp /home/vagrant/ceph.conf /etc/kolla/config/cinder/cinder-backup/ceph.conf && sudo cp /home/vagrant/ceph.conf /etc/kolla/config/cinder/cinder-volume/ceph.conf && \
+sudo cp /home/vagrant/ceph.conf /etc/kolla/config/nova/ceph.conf
+
+####################################################################################################################################
